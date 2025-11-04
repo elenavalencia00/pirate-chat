@@ -1,7 +1,7 @@
 # 🏴 Pirate Chat
 
 **Pirate Chat** is a real-time chat application built with **React**, **TypeScript**, and **Node.js**.  
-Every message is automatically translated into pirate language using the [Fun Translations Pirate API](https://api.funtranslations.com/translate/pirate.json).
+Every message is automatically translated into pirate language using the [Fun Translations Pirate API]((https://funtranslations.com/pirate)).
 
 ---
 
