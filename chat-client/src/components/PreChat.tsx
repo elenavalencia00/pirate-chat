@@ -1,22 +1,16 @@
 // src/components/PreChat.tsx
-import React, { useState } from 'react';
-import '../prechat.css';
-import type { User } from '../types';
+import React, { useState } from "react";
+import "../prechat.css";
+import type { User } from "../types";
 
-const profileOptions = [
-  '/profiles/avatar1.png',
-  '/profiles/avatar2.png',
-  '/profiles/avatar3.png',
-  '/profiles/avatar4.png',
-  '/profiles/avatar5.png',
-];
+const profileOptions = ["/1.PNG", "/2.PNG", "/3.PNG", "/4.PNG", "/5.PNG"];
 
 interface PreChatProps {
   onUserReady: (user: User) => void;
 }
 
 const PreChat: React.FC<PreChatProps> = ({ onUserReady }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [selectedProfile, setSelectedProfile] = useState<string | null>(null);
 
   const handleStart = () => {
@@ -27,10 +21,11 @@ const PreChat: React.FC<PreChatProps> = ({ onUserReady }) => {
 
   return (
     <div className="prechat-container">
-      <h2>Elige tu nombre y perfil</h2>
+      <h1 className="pirate-title">🏴‍☠️ Welcome Aboard! 🏴‍☠️</h1>
+      <h2>Choose your pirate name and avatar</h2>
       <input
         type="text"
-        placeholder="Tu nombre"
+        placeholder="Your pirate name..."
         value={name}
         onChange={(e) => setName(e.target.value)}
         maxLength={20}
@@ -41,16 +36,13 @@ const PreChat: React.FC<PreChatProps> = ({ onUserReady }) => {
             key={profile}
             src={profile}
             alt="avatar"
-            className={selectedProfile === profile ? 'selected' : ''}
+            className={selectedProfile === profile ? "selected" : ""}
             onClick={() => setSelectedProfile(profile)}
           />
         ))}
       </div>
-      <button
-        disabled={!name.trim() || !selectedProfile}
-        onClick={handleStart}
-      >
-        Entrar al chat
+      <button disabled={!name.trim() || !selectedProfile} onClick={handleStart}>
+        ⚓ Set Sail to Chat! ⚓
       </button>
     </div>
   );

@@ -9,10 +9,13 @@ app.use(cors())
 const server = createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // donde corre tu cliente Vite
+    origin: ["http://localhost:5173", "http://localhost:5174"], // Allow both ports
     methods: ["GET", "POST"]
   }
 })
+
+// Store connected users
+const connectedUsers = new Map<string, { name: string; avatar: string }>()
 
 // Función para traducir a idioma pirata
 async function translateToPirate(text: string): Promise<string> {
@@ -37,6 +40,15 @@ async function translateToPirate(text: string): Promise<string> {
 io.on("connection", socket => {
   console.log("🟢 Usuario conectado:", socket.id)
 
+  // Handle user joining
+  socket.on("user_join", (userData: { name: string; avatar: string }) => {
+    connectedUsers.set(socket.id, userData)
+    console.log(`👤 ${userData.name} joined the chat`)
+    
+    // Send updated user list to all clients
+    io.emit("users_update", Array.from(connectedUsers.values()))
+  })
+
   socket.on("send_message", async (data) => {
     console.log("📨 Mensaje recibido:", data.message)
     
@@ -55,7 +67,14 @@ io.on("connection", socket => {
   })
 
   socket.on("disconnect", () => {
-    console.log("🔴 Usuario desconectado:", socket.id)
+    const user = connectedUsers.get(socket.id)
+    if (user) {
+      console.log(`🔴 ${user.name} disconnected`)
+      connectedUsers.delete(socket.id)
+      
+      // Send updated user list to all clients
+      io.emit("users_update", Array.from(connectedUsers.values()))
+    }
   })
 })
 
