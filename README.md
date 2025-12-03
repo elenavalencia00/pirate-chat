@@ -1,106 +1,74 @@
-# 🏴 Pirate Chat
+# Pirate Chat
 
-**Pirate Chat** is a real-time chat application built with **React**, **TypeScript**, and **Node.js**.  
-Every message is automatically translated into pirate language using the [Fun Translations Pirate API]((https://funtranslations.com/pirate)).
+A real-time chat application where verything you type in English is automatically translated to pirate language using the [Fun Translations Pirate API](https://funtranslations.com/api/pirate). You can try it live [here](https://pirate-chat.vercel.app/).
 
----
+## Features
 
-## 🧭 Overview
+- Real-time chat between multiple users
+- Messages are translated to pirate speak using Fun Translations Pirate API
+- Choose your username and avatar
+- See a list of connected users
 
-Pirate Chat connects a React frontend with an Express backend to demonstrate:
-- Handling real-time chat updates  
-- Communicating between client and server  
-- Integrating external APIs for language translation  
+## Technologies Used
 
-Users write messages in plain English — and the app instantly returns them in pirate speak.
+- React
+- TypeScript
+- Vite
+- Node.js
+- Express
+- Socket.io
+- Fun Translations Pirate API
 
----
+## Getting Started
 
-## ⚙️ Features
+### Prerequisites
 
-- Real-time chat between users  
-- Automatic translation to pirate language  
-- React + TypeScript frontend powered by Vite  
-- Node.js + Express backend  
-- Environment-based API configuration  
+- Node.js (v18+ recommended)
+- npm
 
----
+### Installation
 
-## 🧰 Tech Stack
+1. Clone the repository:
+   ```
+   git clone https://github.com/elenavalencia00/pirate-chat-vercel.git
+   cd pirate-chat-vercel
+   ```
 
-| Layer | Technologies |
-|-------|---------------|
-| **Frontend** | React, TypeScript, Vite |
-| **Backend** | Node.js, Express |
-| **API** | Fun Translations Pirate API |
-| **Dev Tools** | Concurrently (runs client + server together) |
+2. Install dependencies for both client and server:
+   ```
+   cd chat-server
+   npm install
+   cd ../chat-client
+   npm install
+   cd ..
+   ```
 
----
+### Running Locally
 
-## 🚀 Installation
+Open two terminals:
 
-Clone the repository:
-
+**Terminal 1: Start the server**
 ```
-git clone https://github.com/elenavalencia00/pirate-chat.git
-cd pirate-chat
-```
-Install dependencies for both the client and the server:
-
-```
-npm install
-cd client && npm install
-cd ../server && npm install
-```
-
-Run both servers together:
-
-```
-cd ..
+cd chat-server
 npm run dev
 ```
 
-By default:
-
-Frontend → http://localhost:5173
-
-Backend → http://localhost:5000
-
-
-🔐 Environment Variables
-
-In the server directory, create a .env file:
-
+**Terminal 2: Start the client**
 ```
-API_URL=https://api.funtranslations.com/translate/pirate.json
-PORT=5000
+cd chat-client
+npm run dev
 ```
 
-💬 Usage
-Start the development servers.
+- The client will be available at `http://localhost:5173`
+- The server will run at `http://localhost:3001`
 
-Open the client in your browser.
+### Deployment
 
-Type a message in English — it will appear translated to pirate language.
+- The frontend can be deployed on Vercel or Netlify (set the root directory to `chat-client`).
+- The backend can be deployed on Render, Railway, or similar (set the root directory to `chat-server`).
 
-Example:
+Update the client socket connection URL in `chat-client/src/socket.ts` to point to your deployed backend.
 
-Input	Output
-Hello everyone, how are you today?	Ahoy mateys! How be ye this fine day?
+## License
 
-🗂️ Project Structure
-
-pirate-chat/
-│
-├── client/            # React + Vite frontend
-│   ├── src/
-│   └── package.json
-│
-├── server/            # Node + Express backend
-│   ├── index.ts
-│   └── package.json
-│
-├── package.json       # Runs both client and server
-└── README.md
-🪙 License
-This project is open source under the MIT License.
+MIT
